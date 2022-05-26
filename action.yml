@@ -1,13 +1,17 @@
-name: 'Hello World'
-description: 'Greet someone and record the time'
+name: 'File Changed Check'
+description: 'Check file is chenged'
 inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
+  target:  # id of input
+    description: 'target file name'
     required: true
-    default: 'World'
+    default: 'README.md'
+  token:  # id of input
+    description: 'github token'
+    required: false
+    default: ${{ github.token }}
 outputs:
-  time: # id of output
-    description: 'The time we greeted you'
+  isChanged: # id of output
+    description: 'The target file is changed'
 runs:
   using: 'node16'
-  main: 'index.js'
+  main: 'file-dif.js'
