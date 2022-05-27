@@ -14,4 +14,4 @@ outputs:
     description: 'The target file is changed'
 runs:
   using: 'node16'
-  main: 'file-dif.js'
+  main: 'file-diff.js'
