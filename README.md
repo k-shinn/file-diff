@@ -1,21 +1,23 @@
-# Hello world javascript action
+# File-Diff javascript action
 
-This action prints "Hello World" or "Hello" + the name of a person to greet to the log.
+PRから呼び出すことで、特定のファイルの変更がそのPRに含まれているかを判定するAction。
+結果はPRへのCommentで提示します
 
 ## Inputs
 
-## `who-to-greet`
+## `target`
 
-**Required** The name of the person to greet. Default `"World"`.
+**Required** 変更を確認したいターゲットのファイル名。 Defaultは `"README.md"`.
 
 ## Outputs
 
-## `time`
+## `isChanged`
 
-The time we greeted you.
+指定したファイルが変更されていたかの結果。
+Bool値で返ります。
 
 ## Example usage
 
-uses: actions/hello-world-javascript-action@v1.1
-with:
-  who-to-greet: 'Mona the Octocat'
+      - uses: k-shinn/file-diff@master
+        with:
+          target: 'README.md'
