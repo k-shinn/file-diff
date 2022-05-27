@@ -20,6 +20,13 @@ async function run() {
         const fill = data.filter(v => v.filename == target);
         const result = fill.length > 0
         core.setOutput("isChanged", result)
+
+        await octkit.rest.issues.createComment({
+            owner: github.context.repo.owner,
+            repo: github.context.repo.repo,
+            pull_number: prNum,
+            body: `${target} is changed: ${result}`
+        })
     } catch (error) {
         core.setFailed(error.message);
     }
