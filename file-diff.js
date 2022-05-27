@@ -24,7 +24,7 @@ async function run() {
         await octkit.rest.issues.createComment({
             owner: github.context.repo.owner,
             repo: github.context.repo.repo,
-            pull_number: prNum,
+            issue_number: prNum,
             body: `${target} is changed: ${result}`
         })
     } catch (error) {
