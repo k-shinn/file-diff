@@ -21,11 +21,18 @@ async function run() {
         const result = fill.length > 0
         core.setOutput("isChanged", result)
 
+        let message = ``
+        if (result == true) {
+            message = `更新されています`
+        } else {
+            message = `更新されていません`
+        }
+
         await octkit.rest.issues.createComment({
             owner: github.context.repo.owner,
             repo: github.context.repo.repo,
             issue_number: prNum,
-            body: `${target} is changed: ${result}`
+            body: `${target} は ${message}`
         })
     } catch (error) {
         core.setFailed(error.message);
