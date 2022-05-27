@@ -1,17 +1,17 @@
 name: 'File Changed Check'
 description: 'Check file is chenged'
-inputs:
-  target:  # id of input
+inputs: # action利用者向けのinput定義
+  target:
     description: 'target file name'
     required: true
     default: 'README.md'
-  token:  # id of input
+  token:
     description: 'github token'
     required: false
-    default: ${{ github.token }}
-outputs:
-  isChanged: # id of output
+    default: ${{ github.token }} # githubのコンテキストからtoken取得
+outputs: # action利用者向けのoutput定義
+  isChanged:
     description: 'The target file is changed'
 runs:
-  using: 'node16'
-  main: 'file-diff.js'
+  using: 'node16' # node使うことの宣言
+  main: 'file-diff.js' # 呼び出すjsファイルの指定
