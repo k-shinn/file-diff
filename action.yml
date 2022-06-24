@@ -9,6 +9,10 @@ inputs: # action利用者向けのinput定義
     description: 'github token'
     required: false
     default: ${{ github.token }} # githubのコンテキストからtoken取得
+  head_ref:
+    description: 'github head_ref'
+    required: false
+    default: ${{ github.head_ref }} # comment出力用
 outputs: # action利用者向けのoutput定義
   isChanged:
     description: 'The target file is changed'
