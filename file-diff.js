@@ -26,7 +26,7 @@ async function run() {
         if (result == false) {
             const filePath = `${github.context.payload.repository.html_url}/blob/${head_ref}/${target}`
             console.log(`filePath: ${filePath}`)
-            const message = `[${target}](${filePath})が更新されていません🙅‍♀️`
+            const message = `[${target}](${filePath}) が更新されていません🙅‍♀️`
 
             await octkit.rest.issues.createComment({
                 owner: github.context.repo.owner,
