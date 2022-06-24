@@ -42,6 +42,9 @@ async function run() {
         console.log(`github.context.payload.ref: ${github.context.payload.ref}`)
         console.log(`github.context.payload.repository.html_url: ${github.context.payload.repository.html_url}`)
         console.log(`github.context.payload.html_url: ${github.context.payload.html_url}`)
+        console.log(`github.context.payload.pull_request.ref: ${github.context.payload.pull_request.ref}`)
+        console.log(`github.context.payload.pull_request.target: ${github.context.payload.pull_request.target}`)
+        console.log(`github.context.payload.pull_request.repository: ${github.context.payload.pull_request.repository}`)
 
         await octkit.rest.issues.createComment({
             owner: github.context.repo.owner,
