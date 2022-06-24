@@ -9,6 +9,22 @@ inputs: # action利用者向けのinput定義
     description: 'github token'
     required: false
     default: ${{ github.token }} # githubのコンテキストからtoken取得
+  action_repository:
+    description: 'github action_repository'
+    required: false
+    default: ${{ github.action_repository }}
+  head_ref:
+    description: 'github head_ref'
+    required: false
+    default: ${{ github.head_ref }} 
+  base_ref:
+    description: 'github base_ref'
+    required: false
+    default: ${{ github.base_ref }} 
+  server_url:
+    description: 'github server_url'
+    required: false
+    default: ${{ github.server_url }} 
 outputs: # action利用者向けのoutput定義
   isChanged:
     description: 'The target file is changed'

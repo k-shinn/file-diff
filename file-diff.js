@@ -8,6 +8,15 @@ async function run() {
         const token = core.getInput("token");    // token = ${{ github.token }}
         const octkit = github.getOctokit(token); // toolkitを使用してGithubのRestApi用Client取得
 
+        const action_repository = core.getInput("action_repository");
+        const head_ref = core.getInput("head_ref");
+        const base_ref = core.getInput("base_ref");
+        const server_url = core.getInput("server_url");
+        console.log(`action_repository: ${action_repository}`)
+        console.log(`head_ref: ${head_ref}`)
+        console.log(`base_ref: ${base_ref}`)
+        console.log(`server_url: ${server_url}`)
+
         const prNum = github.context.payload.pull_request.number; // PRのNumber取得
         const { data } = await octkit.rest.pulls.listFiles({
             owner: github.context.repo.owner,
@@ -24,9 +33,9 @@ async function run() {
 
         let message = ``
         if (result == true) {
-            message = `更新されています💯 [link-test](https://github.com/`
+            message = `更新されています [link-test](https://github.com/`
         } else {
-            message = `更新されていません🙅‍♀️ [link-test](https://github.com/)`
+            message = `更新されていません [link-test](https://github.com/)`
         }
 
         console.log(`github.serverUrl: ${github.serverUrl}`)
