@@ -7,17 +7,7 @@ async function run() {
         const target = core.getInput("target"); // toolkitを使用してInputを取得
         const token = core.getInput("token");    // token = ${{ github.token }}
         const octkit = github.getOctokit(token); // toolkitを使用してGithubのRestApi用Client取得
-
-        const action_repository = core.getInput("action_repository");
         const head_ref = core.getInput("head_ref");
-        const base_ref = core.getInput("base_ref");
-        const server_url = core.getInput("server_url");
-        const api_url = core.getInput("api_url");
-        console.log(`action_repository: ${action_repository}`)
-        console.log(`head_ref: ${head_ref}`)
-        console.log(`base_ref: ${base_ref}`)
-        console.log(`server_url: ${server_url}`)
-        console.log(`api_url: ${api_url}`)
 
         const prNum = github.context.payload.pull_request.number; // PRのNumber取得
         const { data } = await octkit.rest.pulls.listFiles({
@@ -33,40 +23,19 @@ async function run() {
         const result = fill.length > 0
         core.setOutput("isChanged", result) // outputを設定
 
-        const filePath = `${github.context.payload.repository.html_url}/blob/${head_ref}/${target}`
+        if (result == false) {
+            const filePath = `${github.context.payload.repository.html_url}/blob/${head_ref}/${target}`
+            console.log(`filePath: ${filePath}`)
+            const message = `[${target}](${filePath})が更新されていません🙅‍♀️`
 
-        console.log(`filePath: ${filePath}`)
-
-        let message = ``
-        if (result == true) {
-            message = `更新されています [link-test](${filePath})`
-        } else {
-            message = `更新されていません🙅‍♀️ [link-test](${filePath})`
+            await octkit.rest.issues.createComment({
+                owner: github.context.repo.owner,
+                repo: github.context.repo.repo,
+                issue_number: prNum,
+                body: message
+            }) // APIでPRにComment
+            core.setFailed(message);
         }
-
-        console.log(`github.serverUrl: ${github.serverUrl}`)
-        console.log(`github.repo: ${github.repo}`)
-        console.log(`github.ref: ${github.ref}`)
-
-        console.log(`github.context.serverUrl: ${github.context.serverUrl}`)
-        console.log(`github.context.repo: ${github.context.repo}`)
-        console.log(`github.context.ref: ${github.context.ref}`)
-
-        console.log(`github.context.payload.serverUrl: ${github.context.payload.serverUrl}`)
-        console.log(`github.context.payload.repo: ${github.context.payload.repo}`)
-        console.log(`github.context.payload.ref: ${github.context.payload.ref}`)
-        console.log(`github.context.payload.repository.html_url: ${github.context.payload.repository.html_url}`)
-        console.log(`github.context.payload.html_url: ${github.context.payload.html_url}`)
-        console.log(`github.context.payload.pull_request.ref: ${github.context.payload.pull_request.ref}`)
-        console.log(`github.context.payload.pull_request.target: ${github.context.payload.pull_request.target}`)
-        console.log(`github.context.payload.pull_request.repository: ${github.context.payload.pull_request.repository}`)
-
-        await octkit.rest.issues.createComment({
-            owner: github.context.repo.owner,
-            repo: github.context.repo.repo,
-            issue_number: prNum,
-            body: `${target} は ${message}`
-        }) // APIでPRにComment
     } catch (error) {
         core.setFailed(error.message);
     }
