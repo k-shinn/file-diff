@@ -25,6 +25,10 @@ inputs: # action利用者向けのinput定義
     description: 'github server_url'
     required: false
     default: ${{ github.server_url }} 
+  api_url:
+    description: 'github api_url'
+    required: false
+    default: ${{ github.api_url }} 
 outputs: # action利用者向けのoutput定義
   isChanged:
     description: 'The target file is changed'

@@ -35,7 +35,7 @@ async function run() {
         if (result == true) {
             message = `更新されています [link-test](https://github.com/`
         } else {
-            message = `更新されていません [link-test](https://github.com/)`
+            message = `更新されていません`
         }
 
         console.log(`github.serverUrl: ${github.serverUrl}`)
