@@ -33,11 +33,15 @@ async function run() {
         const result = fill.length > 0
         core.setOutput("isChanged", result) // outputを設定
 
+        const filePath = `${github.context.payload.repository.html_url}/blob/${head_ref}/${target}`
+
+        console.log(`filePath: ${filePath}`)
+
         let message = ``
         if (result == true) {
-            message = `更新されています [link-test](https://github.com/`
+            message = `更新されています [link-test](${filePath})`
         } else {
-            message = `更新されていません🙅‍♀️ [link-test](https://github.com/`
+            message = `更新されていません🙅‍♀️ [link-test](${filePath})`
         }
 
         console.log(`github.serverUrl: ${github.serverUrl}`)
