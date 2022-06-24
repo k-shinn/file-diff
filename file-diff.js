@@ -12,10 +12,12 @@ async function run() {
         const head_ref = core.getInput("head_ref");
         const base_ref = core.getInput("base_ref");
         const server_url = core.getInput("server_url");
+        const api_url = core.getInput("api_url");
         console.log(`action_repository: ${action_repository}`)
         console.log(`head_ref: ${head_ref}`)
         console.log(`base_ref: ${base_ref}`)
         console.log(`server_url: ${server_url}`)
+        console.log(`api_url: ${api_url}`)
 
         const prNum = github.context.payload.pull_request.number; // PRのNumber取得
         const { data } = await octkit.rest.pulls.listFiles({
@@ -35,7 +37,7 @@ async function run() {
         if (result == true) {
             message = `更新されています [link-test](https://github.com/`
         } else {
-            message = `更新されていません`
+            message = `更新されていません🙅‍♀️ [link-test](https://github.com/`
         }
 
         console.log(`github.serverUrl: ${github.serverUrl}`)
