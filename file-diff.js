@@ -24,10 +24,24 @@ async function run() {
 
         let message = ``
         if (result == true) {
-            message = `更新されています`
+            message = `更新されています💯 [link-test](https://github.com/`
         } else {
-            message = `更新されていません`
+            message = `更新されていません🙅‍♀️ [link-test](https://github.com/)`
         }
+
+        console.log(`github.serverUrl: ${github.serverUrl}`)
+        console.log(`github.repo: ${github.repo}`)
+        console.log(`github.ref: ${github.ref}`)
+
+        console.log(`github.context.serverUrl: ${github.context.serverUrl}`)
+        console.log(`github.context.repo: ${github.context.repo}`)
+        console.log(`github.context.ref: ${github.context.ref}`)
+
+        console.log(`github.context.payload.serverUrl: ${github.context.payload.serverUrl}`)
+        console.log(`github.context.payload.repo: ${github.context.payload.repo}`)
+        console.log(`github.context.payload.ref: ${github.context.payload.ref}`)
+        console.log(`github.context.payload.repository.html_url: ${github.context.payload.repository.html_url}`)
+        console.log(`github.context.payload.html_url: ${github.context.payload.html_url}`)
 
         await octkit.rest.issues.createComment({
             owner: github.context.repo.owner,
