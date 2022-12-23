@@ -1,5 +1,5 @@
 name: 'File Changed Check'
-description: 'Check file is chenged'
+description: 'Check file is changed'
 inputs: # action利用者向けのinput定義
   target:
     description: 'target file name'
