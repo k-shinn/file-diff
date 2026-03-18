@@ -10,20 +10,30 @@ async function run() {
         const head_ref = core.getInput("head_ref");
 
         const prNum = github.context.payload.pull_request.number; // PRのNumber取得
-        const { data } = await octkit.rest.pulls.listFiles({
-            owner: github.context.repo.owner,
-            repo: github.context.repo.repo,
-            pull_number: prNum
-        }); // APIからPRのファイルリストを取得
 
-        const files = data.map((v) => v.filename);
-        data.forEach(v => console.log(`fileNames: ${v.filename}`));
+        // 1ページずつ取得し、見つかったら早期終了
+        let result = false;
+        let page = 1;
+        while (true) {
+            const { data } = await octkit.rest.pulls.listFiles({
+                owner: github.context.repo.owner,
+                repo: github.context.repo.repo,
+                pull_number: prNum,
+                per_page: 30,
+                page: page
+            });
+            if (data.length === 0) break;
 
-        const fill = data.filter(v => v.filename == target);
-        const result = fill.length > 0
-        core.setOutput("isChanged", result) // outputを設定
+            data.forEach(v => console.log(`fileNames: ${v.filename}`));
+            if (data.some(v => v.filename === target)) {
+                result = true;
+                break;
+            }
+            page++;
+        }
+        core.setOutput("isChanged", result); // outputを設定
 
-        if (result == false) {
+        if (!result) {
             const filePath = `${github.context.payload.repository.html_url}/blob/${head_ref}/${target}`
             console.log(`filePath: ${filePath}`)
             const message = `[${target}](${filePath}) が更新されていません🙅‍♀️`
