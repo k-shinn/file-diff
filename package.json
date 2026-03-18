@@ -1,6 +1,6 @@
 {
   "name": "file-diff",
-  "version": "1.0.0",
+  "version": "1.2.1",
   "description": "PRから呼び出すことで、特定のファイルの変更がそのPRに含まれているかを判定するAction。 結果はPRへのCommentで提示します",
   "main": "file-diff.js",
   "scripts": {
