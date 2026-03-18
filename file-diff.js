@@ -22,6 +22,7 @@ async function run() {
                 per_page: 30,
                 page: page
             });
+            console.log(`listFiles: page=${page}, files=${data.length}`);
             if (data.length === 0) break;
 
             data.forEach(v => console.log(`fileNames: ${v.filename}`));
