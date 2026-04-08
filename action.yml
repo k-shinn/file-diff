@@ -17,5 +17,5 @@ outputs: # action利用者向けのoutput定義
   isChanged:
     description: 'The target file is changed'
 runs:
-  using: 'node16' # node使うことの宣言
+  using: 'node20' # node使うことの宣言
   main: 'file-diff.js' # 呼び出すjsファイルの指定
