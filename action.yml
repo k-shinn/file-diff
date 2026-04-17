@@ -17,5 +17,5 @@ outputs: # action利用者向けのoutput定義
   isChanged:
     description: 'The target file is changed'
 runs:
-  using: 'node22' # node使うことの宣言
+  using: 'node24' # node使うことの宣言
   main: 'dist/index.js' # nccでバンドルしたファイルの指定
