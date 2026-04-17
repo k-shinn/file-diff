@@ -1,6 +1,6 @@
 // actions kit, githubが用意してくれている便利なTool群
-const core = require('@actions/core');
-const github = require('@actions/github');
+import * as core from '@actions/core';
+import * as github from '@actions/github';
 
 async function run() {
     try {

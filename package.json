@@ -1,9 +1,11 @@
 {
   "name": "file-diff",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "description": "PRから呼び出すことで、特定のファイルの変更がそのPRに含まれているかを判定するAction。 結果はPRへのCommentで提示します",
+  "type": "module",
   "main": "file-diff.js",
   "scripts": {
+    "build": "ncc build file-diff.js -o dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -20,5 +22,8 @@
   "dependencies": {
     "@actions/core": "^3.0.0",
     "@actions/github": "^9.0.0"
+  },
+  "devDependencies": {
+    "@vercel/ncc": "^0.38.4"
   }
 }
